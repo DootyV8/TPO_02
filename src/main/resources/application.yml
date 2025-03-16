@@ -1,0 +1,6 @@
+file:
+  path: src/main/resources/words.csv
+
+spring:
+  profiles:
+    active: UPPERCASE
