@@ -1,4 +1,4 @@
-package model;
+package flashcards.model;
 
 public class Entry {
     private String polish;
@@ -11,7 +11,6 @@ public class Entry {
         this.german = german;
     }
 
-    // Getters and Setters
     public String getPolish() { return polish; }
     public void setPolish(String polish) { this.polish = polish; }
 

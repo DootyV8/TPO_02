@@ -1,4 +1,6 @@
-import controller.FlashcardsController;
+package flashcards;
+
+import flashcards.controller.FlashcardsController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -6,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"config", "controller", "repository", "service"})
+@ComponentScan(basePackages = {"flashcards.config", "flashcards.controller", "flashcards.repository", "flashcards.service"})
 public class FlashcardsApp implements CommandLineRunner {
 
     private final FlashcardsController flashcardsController;

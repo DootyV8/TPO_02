@@ -1,6 +1,6 @@
-package repository;
+package flashcards.repository;
 
-import model.Entry;
+import flashcards.model.Entry;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

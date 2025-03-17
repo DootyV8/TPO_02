@@ -1,11 +1,11 @@
-package controller;
+package flashcards.controller;
 
-import config.Format;
-import model.Entry;
+import flashcards.config.Format;
+import flashcards.model.Entry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import repository.EntryRepository;
-import service.FileService;
+import flashcards.repository.EntryRepository;
+import flashcards.service.FileService;
 
 import java.util.List;
 import java.util.Scanner;
@@ -32,7 +32,7 @@ public class FlashcardsController {
             System.out.println("3. Take a test");
             System.out.println("4. Exit");
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1 -> addWord();
@@ -54,13 +54,14 @@ public class FlashcardsController {
 
         Entry entry = new Entry(polish, english, german);
         entryRepository.addEntry(entry);
+        fileService.saveEntriesToFile();
         System.out.println("Word added successfully!");
     }
+
 
     private void displayAllWords() {
         List<Entry> entries = entryRepository.getAllEntries();
         for (Entry entry : entries) {
-            // Format each word using the Format bean
             String formattedPolish = format.format(entry.getPolish());
             String formattedEnglish = format.format(entry.getEnglish());
             String formattedGerman = format.format(entry.getGerman());
@@ -76,7 +77,6 @@ public class FlashcardsController {
             return;
         }
 
-        // Format the test word using the Format bean
         String formattedPolish = format.format(entry.getPolish());
         System.out.println("Translate the word: " + formattedPolish);
 
@@ -85,20 +85,21 @@ public class FlashcardsController {
         System.out.println("Enter German translation:");
         String germanAnswer = scanner.nextLine();
 
-        // Format the correct answers for comparison
         String formattedEnglish = format.format(entry.getEnglish());
         String formattedGerman = format.format(entry.getGerman());
 
         if (englishAnswer.equalsIgnoreCase(formattedEnglish)) {
-            System.out.println("Correct English translation!");
+            System.out.println("Correct English translation");
         } else {
-            System.out.println("Incorrect English translation!");
+            System.out.println("Incorrect English translation");
         }
 
         if (germanAnswer.equalsIgnoreCase(formattedGerman)) {
-            System.out.println("Correct German translation!");
+            System.out.println("Correct German translation");
         } else {
-            System.out.println("Incorrect German translation!");
+            System.out.println("Incorrect German translation");
         }
     }
+
+
 }

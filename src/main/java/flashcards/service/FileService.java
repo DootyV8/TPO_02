@@ -1,20 +1,22 @@
-package service;
+package flashcards.service;
 
-import model.Entry;
+import flashcards.model.Entry;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import repository.EntryRepository;
+import flashcards.repository.EntryRepository;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 @Service
 public class FileService {
     private final String filePath;
     private final EntryRepository entryRepository;
 
-    public FileService(@Value("${file.path}") String filePath, EntryRepository entryRepository) {
+    public FileService(@Value("${pl.edu.pja.tpo02}") String filePath, EntryRepository entryRepository) {
         this.filePath = filePath;
         this.entryRepository = entryRepository;
         loadEntriesFromFile();
@@ -34,4 +36,15 @@ public class FileService {
             e.printStackTrace();
         }
     }
+
+    public void saveEntriesToFile() {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
+            for (Entry entry : entryRepository.getAllEntries()) {
+                writer.println(entry.getPolish() + "," + entry.getEnglish() + "," + entry.getGerman());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

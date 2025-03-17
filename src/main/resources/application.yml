@@ -1,6 +1,10 @@
-file:
-  path: src/main/resources/words.csv
-
 spring:
   profiles:
-    active: UPPERCASE
+    active: lowercase
+
+  banner:
+    location: classpath:logo-app
+
+  config:
+    import: classpath:external.yml
+
